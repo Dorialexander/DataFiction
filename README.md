@@ -6,7 +6,7 @@ Pour l'instant, il contient les jeux de données associés à la parution de l'a
 * *persons_novel.csv* (5 mo compressé, 35 mo décompressé) : ensemble des "actes éditoriaux" associés à une publication. Ces actes éditoriaux correspondent à l'ensemble des rôles définis par la BNF (auteur du texte, traduction, illustrateur, etc.). Lorsqu'une publication a fait l'objet de plusieurs interventions, ses métadonnées sont répétées plusieurs fois.
 * *persons_novel_alive.csv* (3,6 mo compressé, 23 mo décompressé) : même fichier que précédemment sauf que l'on n'a gardé que les auteurs vivants ou morts récemment au moment de la publication (et, donc, dont on connaissait l'état civil). C'est ce fichier qui été utilisé pour établir la part de romancières à différentes époques, afin de corriger partiellement les biais liés à la réédition de "classiques".
 
-##Élaboration des fichiers
+## Élaboration des fichiers
 
 Tous ces fichiers ont été constitués avec les langages de programmation R et Python.  L'élaboration de *complete_novel_1680_1900.csv* et de *persons_novel.csv* a été assez complexe (avec quatre jointures successives sur Data BNF et le catalogue de la BNF) et fera l'objet d'une description ultérieure. Par contre *persons_novel_alive.csv* est juste un dérivé de *persons_novel.csv* généré par la commande R suivante :
 
@@ -27,8 +27,6 @@ persons_novel_alive <- persons_novel %>%
 Pour créer le graphe de représentation des romancières nous avons utilisé les fonctions suivantes :
 
 ```R
-library(tidyverse)
-
 persons_novel_alive %>% 
   filter(language=="fre") %>% #Uniquement les œuvres en français (ailleurs les données de Gallica ne sont plus représentatives)
   filter(firstyear_data>1700) %>% #Les années de parution postérieures à 1700
